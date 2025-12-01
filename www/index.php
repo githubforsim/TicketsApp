@@ -44,8 +44,10 @@ switch ($path) {
                     break;
                 case 'admin':
                     if (isset($_SESSION['username']) && isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
-                        error_log("[DEBUG INDEX] require admin_view.php");
-                        require 'app/src/Views/admin/admin_view.php';
+                        error_log("[DEBUG INDEX] appel AdminController->showAdminHome()");
+                        require __DIR__ . '/config/routes.php';
+                        $produitId = isset($_GET['produit']) ? $_GET['produit'] : 1;
+                        $adminController->showAdminHome($produitId);
                     } else {
                         error_log("[DEBUG INDEX] require login_view.php (admin non autorisé)");
                         require 'app/src/Views/login_view.php';
@@ -63,8 +65,10 @@ switch ($path) {
                 default:
                     if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                         if ($_SESSION['role'] === 'admin') {
-                            error_log("[DEBUG INDEX] require admin_view.php (default)");
-                            require 'app/src/Views/admin/admin_view.php';
+                            error_log("[DEBUG INDEX] appel AdminController->showAdminHome() (default)");
+                            require __DIR__ . '/config/routes.php';
+                            $produitId = isset($_GET['produit']) ? $_GET['produit'] : 1;
+                            $adminController->showAdminHome($produitId);
                         } elseif ($_SESSION['role'] === 'user') {
                             error_log("[DEBUG INDEX] require index.php (default)");
                             require 'app/src/Views/index.php';
@@ -79,8 +83,10 @@ switch ($path) {
             // Comportement par défaut sans paramètre view
             if (isset($_SESSION['username']) && isset($_SESSION['role'])) {
                 if ($_SESSION['role'] === 'admin') {
-                    error_log("[DEBUG INDEX] require admin_view.php (no param)");
-                    require 'app/src/Views/admin/admin_view.php';
+                    error_log("[DEBUG INDEX] appel AdminController->showAdminHome() (no param)");
+                    require __DIR__ . '/config/routes.php';
+                    $produitId = isset($_GET['produit']) ? $_GET['produit'] : 1;
+                    $adminController->showAdminHome($produitId);
                 } elseif ($_SESSION['role'] === 'user') {
                     error_log("[DEBUG INDEX] require index.php (no param)");
                     require 'app/src/Views/index.php';
