@@ -30,6 +30,9 @@ Thumbs.db
 .vscode/
 .idea/
 
+# Ignorer la configuration Docker locale
+docker-compose.override.yml
+
 # Ignorer les fichiers de build Docker éventuels
 **/node_modules/
 **/dist/
